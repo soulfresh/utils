@@ -25,6 +25,7 @@ if output=$(git status --porcelain) && [ -z "$output" ]; then
   git commit -m "Updated docs"
 
   echo '\nBuilding release...'
+  yarn build
   yarn version
   version=$(node -e "console.log(require('./package.json').version)")
 

@@ -23,7 +23,7 @@ describe('dates', function() {
         {date: '2020-08-31T15:00:00Z', expected: '11:00 AM'},
         {date: '2020-08-31T17:00:00Z', expected: '1:00 PM'},
       ].forEach(({date, expected}) => {
-        expect(formatTime(date, 'en-US', 'America/New_York')).toEqual(expected);
+        expect(formatTime(date, 'America/New_York', 'en-US')).toEqual(expected);
       });
     });
 

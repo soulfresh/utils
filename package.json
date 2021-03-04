@@ -1,0 +1,34 @@
+{
+  "name": "@thesoulfresh/utils",
+  "version": "0.0.1",
+  "description": "Small utilities I use often",
+  "module": "src/index.js",
+  "main": "lib/index.js",
+  "files": [
+    "src/*",
+    "lib/*"
+  ],
+  "sideEffects": false,
+  "repository": "git@github.com:soulfresh/utils.git",
+  "author": "Marc Wren <things@soul-fresh.com>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "build": "webpack",
+    "test": "jest",
+    "test-debug": "node --inspect-brk node_modules/.bin/jest --runInBand",
+    "docs": "jsdoc2md -g grouped --helper docs/helpers.js --template docs/API.hbs --files src/*.js > API.md",
+    "tree-shackable": "agadoo",
+    "release": "scripts/release"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "agadoo": "^2.0.0",
+    "babel-jest": "^26.6.3",
+    "jest": "^26.6.3",
+    "jsdoc-to-markdown": "^7.0.0",
+    "webpack": "^5.11.1",
+    "webpack-cli": "^4.3.0"
+  }
+}

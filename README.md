@@ -16,4 +16,6 @@ Create an tree-shakable ES module bundle.
 
 With webpack: https://stackoverflow.com/a/64272342
 
+With babel directy: https://stackoverflow.com/questions/41289200/output-an-es-module-using-webpack
+
 Or rollup?

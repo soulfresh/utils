@@ -20,10 +20,6 @@ if output=$(git status --porcelain) && [ -z "$output" ]; then
   echo '\nBuilding docs...'
   yarn docs
 
-  echo '\nCommitting docs...'
-  git add -A
-  git commit -m "Updated docs"
-
   echo '\nBuilding release...'
   yarn clean
   yarn build

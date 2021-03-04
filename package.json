@@ -1,6 +1,6 @@
 {
   "name": "@thesoulfresh/utils",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Small utilities I use often",
   "module": "src/index.js",
   "main": "lib/index.js",
@@ -13,6 +13,9 @@
   "author": "Marc Wren <things@soul-fresh.com>",
   "license": "MIT",
   "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "webpack",
     "test": "jest",

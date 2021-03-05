@@ -21,7 +21,7 @@
     "test": "jest",
     "test-debug": "node --inspect-brk node_modules/.bin/jest --runInBand",
     "clean": "rimraf lib",
-    "docs": "jsdoc2md -g grouped --helper docs/helpers.js --template docs/API.hbs --files src/*.js > API.md",
+    "docs": "jsdoc2md --helper docs/helpers.js --template docs/API.hbs --files src/*.js > API.md",
     "tree-shackable": "agadoo",
     "release": "scripts/release"
   },

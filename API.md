@@ -1,10 +1,8 @@
 # @thesoulfresh/utils
-[![view on npm](http://img.shields.io/npm/v/example.svg)](https://www.npmjs.org/package/example)
 
 Useful utility functions that I find myself using frequently.
 
-<b>colors</b><ul><li><a href="#rgbToHex">rgbToHex</a></li></ul><b>dates</b><ul><li><a href="#isDateBetween">isDateBetween</a></li><li><a href="#formatDate">formatDate</a></li><li><a href="#formatTime">formatTime</a></li><li><a href="#formatCurrency">formatCurrency</a></li><li><a href="#formatNumber">formatNumber</a></li></ul><b>strings</b><ul><li><a href="#combineClasses">combineClasses</a></li></ul><b>urls</b><ul><li><a href="#dataURItoBlob">dataURItoBlob</a></li></ul>
-
+<b>colors</b><ul><li><a href="#rgbToHex">rgbToHex</a></li></ul><b>dates</b><ul><li><a href="#isDateBetween">isDateBetween</a></li><li><a href="#formatDate">formatDate</a></li><li><a href="#formatTime">formatTime</a></li><li><a href="#formatCurrency">formatCurrency</a></li><li><a href="#formatNumber">formatNumber</a></li></ul><b>services</b><ul><li><a href="#loggerMixin">loggerMixin</a></li></ul><b>strings</b><ul><li><a href="#combineClasses">combineClasses</a></li></ul><b>urls</b><ul><li><a href="#dataURItoBlob">dataURItoBlob</a></li></ul>
 
 <a name="rgbToHex"></a>
 
@@ -84,6 +82,20 @@ Format a number for display in the user's locale (ex 1,000.00)
 | --- | --- | --- |
 | value | <code>number</code> | The number to format. |
 | [locale] | <code>string</code> | A specific locale to use. This default's   to the browser default locale. |
+
+<a name="loggerMixin"></a>
+
+## loggerMixin(item, [prefix], [debug])
+Give an object logging functionality with correct
+source line numbers.
+
+**Kind**: global function  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| item | <code>object</code> | The object to recieve logging functionality. |
+| [prefix] | <code>string</code> | An optional prefix to append to   log statements. |
+| [debug] | <code>boolean</code> | Turns on the debug (vebose) logging. |
 
 <a name="combineClasses"></a>
 

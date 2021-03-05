@@ -1,6 +1,6 @@
 {
   "name": "@thesoulfresh/utils",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Small utilities I use often",
   "module": "src/index.js",
   "main": "lib/index.js",

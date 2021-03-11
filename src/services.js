@@ -1,5 +1,3 @@
-import { env } from './env';
-
 /**
  * Give an object logging functionality with correct
  * source line numbers.

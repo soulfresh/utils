@@ -2,8 +2,8 @@
   "name": "@thesoulfresh/utils",
   "version": "0.2.0",
   "description": "Small utilities I use often",
-  "module": "src/index.js",
-  "main": "lib/index.js",
+  "main": "lib/cjs/index.js",
+  "module": "lib/esm/index.js",
   "files": [
     "src/*",
     "lib/*"
@@ -17,7 +17,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "webpack",
+    "build": "rollup -c rollup.config.js",
     "test": "jest",
     "test-debug": "node --inspect-brk node_modules/.bin/jest --runInBand",
     "clean": "rimraf lib",
@@ -28,11 +28,13 @@
   "devDependencies": {
     "@babel/core": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
+    "@rollup/plugin-node-resolve": "^11.2.0",
     "agadoo": "^2.0.0",
     "babel-jest": "^26.6.3",
     "jest": "^26.6.3",
     "jsdoc-to-markdown": "^7.0.0",
     "rimraf": "^3.0.2",
+    "rollup": "^2.41.1",
     "webpack": "^5.11.1",
     "webpack-cli": "^4.3.0"
   }

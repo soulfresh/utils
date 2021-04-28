@@ -5,7 +5,6 @@ import {
 describe('strings', function() {
   describe('combineClasses', function() {
     it('should be able to combine class lists correctly.', () => {
-      debugger;
       expect(combineClasses('foo bar', 'baz')).toEqual('foo bar baz');
       expect(combineClasses('foo', 'baz')).toEqual('foo baz');
       expect(combineClasses('foo bar', 'baz bar bar')).toEqual('foo bar baz');

@@ -1,6 +1,6 @@
 {
   "name": "@thesoulfresh/utils",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Small utilities I use often",
   "main": "lib/cjs/index.js",
   "module": "lib/esm/index.js",

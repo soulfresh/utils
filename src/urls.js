@@ -78,7 +78,6 @@ export function blobToImage(blob) {
 export function urlToBlob(url) {
   return new Promise(function(resolve, reject) {
     try {
-      debugger;
       var xhr = new XMLHttpRequest();
       xhr.responseType = "blob";
       xhr.onerror = e => reject(e);
@@ -92,7 +91,6 @@ export function urlToBlob(url) {
       xhr.send();
     }
     catch(err) {
-      console.log('CAUGHT');
       reject(err);
     }
   });

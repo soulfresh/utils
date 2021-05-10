@@ -1,8 +1,145 @@
-# @thesoulfresh/utils
+## Classes
 
-Useful utility functions that I find myself using frequently.
+* [ServiceBase](#ServiceBase)
+    * [new ServiceBase(client, [debug])](#new_ServiceBase_new)
+    * [.addEventListener(name, listener)](#ServiceBase+addEventListener)
+    * [.removeEventListener(name, listener)](#ServiceBase+removeEventListener)
+    * [.emit(name, [...data])](#ServiceBase+emit)
 
-<b>colors</b><ul><li><a href="#rgbToHex">rgbToHex</a></li></ul><b>dates</b><ul><li><a href="#isDateBetween">isDateBetween</a></li><li><a href="#formatDate">formatDate</a></li><li><a href="#formatTime">formatTime</a></li><li><a href="#formatCurrency">formatCurrency</a></li><li><a href="#formatNumber">formatNumber</a></li></ul><b>functions</b><ul><li><a href="#mergeCallbacks">mergeCallbacks</a></li></ul><b>promises</b><ul><li><a href="#separateSettledPromises">separateSettledPromises</a></li></ul><b>services</b><ul><li><a href="#loggerMixin">loggerMixin</a></li></ul><b>strings</b><ul><li><a href="#combineClasses">combineClasses</a></li></ul><b>urls</b><ul><li><a href="#dataURIToBlob">dataURIToBlob</a></li><li><a href="#blobToDataURI">blobToDataURI</a></li><li><a href="#blobToImage">blobToImage</a></li><li><a href="#urlToBlob">urlToBlob</a></li><li><a href="#urlToBase64">urlToBase64</a></li></ul>
+## Functions
+
+* [dataURIToBlob(dataURI)](#dataURIToBlob) ⇒ <code>Blob</code>
+* [blobToDataURI(blob)](#blobToDataURI) ⇒ <code>Promise.&lt;string&gt;</code>
+* [blobToImage(blob)](#blobToImage) ⇒ <code>Promise.&lt;Image&gt;</code>
+* [rgbToHex(r, [g], [b])](#rgbToHex) ⇒ <code>string</code>
+* [isDateBetween(date, minDate, maxDate)](#isDateBetween) ⇒ <code>boolean</code>
+* [formatDate(date, [dateStyle], [locale])](#formatDate) ⇒
+* [formatTime(date, [timeZone], [locale])](#formatTime) ⇒ <code>string</code>
+* [formatCurrency(pennies, currency, [locale])](#formatCurrency) ⇒ <code>string</code>
+* [formatNumber(value, [locale])](#formatNumber) ⇒ <code>string</code>
+* [mergeCallbacks(...callback)](#mergeCallbacks) ⇒ <code>function</code>
+* [separateSettledPromises(results)](#separateSettledPromises) ⇒ <code>Array</code>
+* [loggerMixin(item, [prefix], [debug])](#loggerMixin)
+* [combineClasses(...classes)](#combineClasses) ⇒ <code>string</code>
+* [urlToBlob(url)](#urlToBlob) ⇒ <code>Promise.&lt;Blob&gt;</code>
+* [urlToBase64(url)](#urlToBase64) ⇒ <code>Promise.&lt;string&gt;</code>
+
+<a name="ServiceBase"></a>
+
+## ServiceBase
+**Kind**: global class  
+
+* [ServiceBase](#ServiceBase)
+    * [new ServiceBase(client, [debug])](#new_ServiceBase_new)
+    * [.addEventListener(name, listener)](#ServiceBase+addEventListener)
+    * [.removeEventListener(name, listener)](#ServiceBase+removeEventListener)
+    * [.emit(name, [...data])](#ServiceBase+emit)
+
+<a name="new_ServiceBase_new"></a>
+
+### new ServiceBase(client, [debug])
+A base class you can extend to make new services.
+It provides very basic event listener registration.
+It also provides more accurate console log line numbers
+if you use it's log functions.
+
+Example Usage:
+```js
+    import { ServiceBase } from '@thesoulfresh/utils';
+
+    class MyService extends ServiceBase {
+      authenticate(user) {
+        try {
+          this.log('Authenticating user...');
+          this.emit('authenticated', user);
+        } catch(e) {
+          this.error('Failed to authenticate');
+        }
+      }
+    }
+
+    const s = new MyService(GoogleAuth, true);
+```
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| client | <code>\*</code> | Whatever object or function you   consider the client used under the hood by your service.   For example, this could be an Axios instance. |
+| [debug] | <code>boolean</code> | Whether to turn on verbose logging. |
+
+<a name="ServiceBase+addEventListener"></a>
+
+### serviceBase.addEventListener(name, listener)
+Add a listener for a specific event.
+
+**Kind**: instance method of [<code>ServiceBase</code>](#ServiceBase)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| name | <code>string</code> | The name of the event to listen for. |
+| listener | <code>function</code> | The callback function called when   the associated event is emitted. |
+
+<a name="ServiceBase+removeEventListener"></a>
+
+### serviceBase.removeEventListener(name, listener)
+Remove a listener for a specific event.
+
+**Kind**: instance method of [<code>ServiceBase</code>](#ServiceBase)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| name | <code>string</code> | The name of the event to listen for. |
+| listener | <code>function</code> | The callback function that was listening. |
+
+<a name="ServiceBase+emit"></a>
+
+### serviceBase.emit(name, [...data])
+Emit an event with optional data.
+
+**Kind**: instance method of [<code>ServiceBase</code>](#ServiceBase)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| name | <code>string</code> | The name of the event to listen for. |
+| [...data] | <code>\*</code> | The data to pass to the event listeners. |
+
+<a name="dataURIToBlob"></a>
+
+## dataURIToBlob(dataURI) ⇒ <code>Blob</code>
+Convert a data url into a `Blob` object.
+Taken from: https://stackoverflow.com/questions/6850276/how-to-convert-dataurl-to-file-object-in-javascript
+
+**Kind**: global function  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| dataURI | <code>string</code> | The data URI string to convert. |
+
+<a name="blobToDataURI"></a>
+
+## blobToDataURI(blob) ⇒ <code>Promise.&lt;string&gt;</code>
+Convert a `Blob` or `File` object into a data uri string.
+
+This uses `FileReader` under the hood.
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| blob | <code>Blob</code> | 
+
+<a name="blobToImage"></a>
+
+## blobToImage(blob) ⇒ <code>Promise.&lt;Image&gt;</code>
+Create an `Image` object from a `Blob` or `File` object.
+It returns the Image after the data has loaded and
+rejects if there are any errors loading the image.
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| blob | <code>Blob</code> | 
 
 <a name="rgbToHex"></a>
 
@@ -156,44 +293,6 @@ empty/null/undefined strings.
 | Param | Type | Description |
 | --- | --- | --- |
 | ...classes | <code>string</code> | The list of class names to merge. |
-
-<a name="dataURIToBlob"></a>
-
-## dataURIToBlob(dataURI) ⇒ <code>Blob</code>
-Convert a data url into a `Blob` object.
-Taken from: https://stackoverflow.com/questions/6850276/how-to-convert-dataurl-to-file-object-in-javascript
-
-**Kind**: global function  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| dataURI | <code>string</code> | The data URI string to convert. |
-
-<a name="blobToDataURI"></a>
-
-## blobToDataURI(blob) ⇒ <code>Promise.&lt;string&gt;</code>
-Convert a `Blob` or `File` object into a data uri string.
-
-This uses `FileReader` under the hood.
-
-**Kind**: global function  
-
-| Param | Type |
-| --- | --- |
-| blob | <code>Blob</code> | 
-
-<a name="blobToImage"></a>
-
-## blobToImage(blob) ⇒ <code>Promise.&lt;Image&gt;</code>
-Create an `Image` object from a `Blob` or `File` object.
-It returns the Image after the data has loaded and
-rejects if there are any errors loading the image.
-
-**Kind**: global function  
-
-| Param | Type |
-| --- | --- |
-| blob | <code>Blob</code> | 
 
 <a name="urlToBlob"></a>
 

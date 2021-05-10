@@ -22,7 +22,7 @@
     "test-debug": "node --inspect-brk node_modules/.bin/jest --runInBand",
     "lint": "eslint --max-warnings 0 './src/**/!(.eslintrc)*.{js,jsx}'",
     "clean": "rimraf lib",
-    "docs": "jsdoc2md --helper docs/helpers.js --template docs/API.hbs --files src/*.js > API.md",
+    "docs": "jsdoc2md --files src/*.js -g grouped > API.md",
     "tree-shackable": "agadoo src/index",
     "release": "scripts/release"
   },

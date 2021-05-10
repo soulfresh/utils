@@ -1,3 +1,4 @@
+export * from './binary';
 export * from './colors';
 export * from './dates';
 export * from './promises';

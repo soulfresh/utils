@@ -1,3 +1,35 @@
+// react-dom disables the window.console functions at various points during its
+// lifecycle (grrrr) which in turn breaks our ability to bind to window.console
+// functions. As a work around, we make references to the individual functions
+// so we can still bind to them if React has moved them from window.console.
+const windowConsole = window.console;
+// Functions we want to enable when the debug flag is on.
+const debugFunctions = [
+  'debug',
+  'log',
+  'info',
+  'trace',
+  'assert',
+  'clear',
+  'count',
+  'dir',
+  'table',
+  'group',
+  'groupCollapsed',
+  'profile',
+  'profileEnd',
+  'time',
+  'timeEnd',
+  'timeLog'
+];
+// Functions we want to always enable.
+const errorFunctions = ['warn', 'error'];
+const localConsole = [...debugFunctions, ...errorFunctions].reduce((acc, level) => {
+  acc[level] = window.console[level];
+}, {});
+
+const noop = () => {};
+
 /**
  * Give an object logging functionality with correct
  * source line numbers.
@@ -5,23 +37,29 @@
  * @param {string} [prefix] - An optional prefix to append to
  *   log statements.
  * @param {boolean} [debug] - Turns on the debug (vebose) logging.
+ *
+ * @property {function} debug
+ * @property {function} log
+ * @property {function} info
+ * @property {function} warn
+ * @property {function} error
+ *
+ * @mixin
  */
 export function loggerMixin(item, prefix, debug = true) {
-
   const bind = prefix
-    ? level => console[level].bind(window.console, prefix)
-    : level => console[level].bind(window.console);
-
-  const noop = () => {};
+    ? level => localConsole[level].bind(windowConsole, prefix)
+    : level => localConsole[level].bind(windowConsole);
 
   // Configurable log levels...
-  ['debug', 'log', 'info'].forEach(level => {
+  debugFunctions.forEach(level => {
     item[level] = debug ? bind(level) : noop;
   });
 
   // Always log the following...
-  item.error = bind('error');
-  item.warn = bind('warn');
+  errorFunctions.forEach(level => {
+    item[level] = bind(level);
+  });
 }
 
 // Exported below because jsDoc doesn't document the class otherwise.
@@ -54,6 +92,7 @@ class ServiceBase {
    *   consider the client used under the hood by your service.
    *   For example, this could be an Axios instance.
    * @param {boolean} [debug] - Whether to turn on verbose logging.
+   * @mixes loggerMixin
    */
   constructor(client, debug) {
     this.client = client;

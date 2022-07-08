@@ -15,7 +15,9 @@ if output=$(git status --porcelain) && [ -z "$output" ]; then
   # Deployment steps go here...
   echo '\nRunning tests...'
   yarn lint
-  yarn tree-shackable
+  # The workaround for React breaking our logger mixing means parts of this lib
+  # cannot be tree shackable :'(
+  # yarn tree-shackable
   yarn test
 
   echo '\nBuilding docs...'

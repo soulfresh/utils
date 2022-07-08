@@ -19,7 +19,7 @@ export function urlToBlob(url) {
         if (xhr.status === 200)
           resolve(xhr.response);
         else
-          reject(new Error("Failed to download image:" + xhr.statusText));
+          reject(new Error(`Failed to download URL (${xhr.statusText}) ${url}`));
       };
       xhr.open("GET", url);
       xhr.send();

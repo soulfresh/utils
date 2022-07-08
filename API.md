@@ -6,6 +6,10 @@
     * [.removeEventListener(name, listener)](#ServiceBase+removeEventListener)
     * [.emit(name, [...data])](#ServiceBase+emit)
 
+## Mixins
+
+* [loggerMixin](#loggerMixin)
+
 ## Functions
 
 * [dataURIToBlob(dataURI)](#dataURIToBlob) ⇒ <code>Blob</code>
@@ -19,7 +23,6 @@
 * [formatNumber(value, [locale])](#formatNumber) ⇒ <code>string</code>
 * [mergeCallbacks(...callback)](#mergeCallbacks) ⇒ <code>function</code>
 * [separateSettledPromises(results)](#separateSettledPromises) ⇒ <code>Array</code>
-* [loggerMixin(item, [prefix], [debug])](#loggerMixin)
 * [combineClasses(...classes)](#combineClasses) ⇒ <code>string</code>
 * [urlToBlob(url)](#urlToBlob) ⇒ <code>Promise.&lt;Blob&gt;</code>
 * [urlToBase64(url)](#urlToBase64) ⇒ <code>Promise.&lt;string&gt;</code>
@@ -28,6 +31,7 @@
 
 ## ServiceBase
 **Kind**: global class  
+**Mixes**: [<code>loggerMixin</code>](#loggerMixin)  
 
 * [ServiceBase](#ServiceBase)
     * [new ServiceBase(client, [debug])](#new_ServiceBase_new)
@@ -102,6 +106,30 @@ Emit an event with optional data.
 | --- | --- | --- |
 | name | <code>string</code> | The name of the event to listen for. |
 | [...data] | <code>\*</code> | The data to pass to the event listeners. |
+
+<a name="loggerMixin"></a>
+
+## loggerMixin
+Give an object logging functionality with correct
+source line numbers.
+
+**Kind**: global mixin  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| item | <code>object</code> | The object to recieve logging functionality. |
+| [prefix] | <code>string</code> | An optional prefix to append to   log statements. |
+| [debug] | <code>boolean</code> | Turns on the debug (vebose) logging. |
+
+**Properties**
+
+| Name | Type |
+| --- | --- |
+| debug | <code>function</code> | 
+| log | <code>function</code> | 
+| info | <code>function</code> | 
+| warn | <code>function</code> | 
+| error | <code>function</code> | 
 
 <a name="dataURIToBlob"></a>
 
@@ -265,20 +293,6 @@ promises.
 | Param | Type | Description |
 | --- | --- | --- |
 | results | <code>Array.&lt;object&gt;</code> | The return from `Promise.allSettled` |
-
-<a name="loggerMixin"></a>
-
-## loggerMixin(item, [prefix], [debug])
-Give an object logging functionality with correct
-source line numbers.
-
-**Kind**: global function  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| item | <code>object</code> | The object to recieve logging functionality. |
-| [prefix] | <code>string</code> | An optional prefix to append to   log statements. |
-| [debug] | <code>boolean</code> | Turns on the debug (vebose) logging. |
 
 <a name="combineClasses"></a>
 

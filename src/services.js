@@ -26,6 +26,7 @@ const debugFunctions = [
 const errorFunctions = ['warn', 'error'];
 const localConsole = [...debugFunctions, ...errorFunctions].reduce((acc, level) => {
   acc[level] = window.console[level];
+  return acc;
 }, {});
 
 const noop = () => {};

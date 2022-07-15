@@ -9,18 +9,10 @@ const debugFunctions = [
   'log',
   'info',
   'trace',
-  'assert',
-  'clear',
-  'count',
   'dir',
   'table',
   'group',
   'groupCollapsed',
-  'profile',
-  'profileEnd',
-  'time',
-  'timeEnd',
-  'timeLog'
 ];
 // Functions we want to always enable.
 const errorFunctions = ['warn', 'error'];
@@ -49,8 +41,8 @@ const noop = () => {};
  */
 export function loggerMixin(item, prefix, debug = true) {
   const bind = prefix
-    ? level => localConsole[level].bind(windowConsole, prefix)
-    : level => localConsole[level].bind(windowConsole);
+    ? level => localConsole[level] && localConsole[level].bind(windowConsole, prefix)
+    : level => localConsole[level] && localConsole[level].bind(windowConsole);
 
   // Configurable log levels...
   debugFunctions.forEach(level => {

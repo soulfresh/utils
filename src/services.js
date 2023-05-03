@@ -39,9 +39,9 @@ const noop = () => {};
  *
  * @mixin
  */
-export function loggerMixin(item, prefix, debug = true) {
+export function loggerMixin(item, prefix, debug = true, logStyle = 'font-weight: bold;') {
   const bind = prefix
-    ? level => localConsole[level] && localConsole[level].bind(windowConsole, prefix)
+    ? level => localConsole[level] && localConsole[level].bind(windowConsole, '%c' + prefix, logStyle)
     : level => localConsole[level] && localConsole[level].bind(windowConsole);
 
   // Configurable log levels...
@@ -87,13 +87,13 @@ class ServiceBase {
    * @param {boolean} [debug] - Whether to turn on verbose logging.
    * @mixes loggerMixin
    */
-  constructor(client, debug) {
+  constructor(client, debug, logStyle) {
     this.client = client;
     this.listeners = [];
 
     // Setup configurable logging.
     const prefix = `[${this.constructor.name}]`;
-    loggerMixin(this, prefix, debug);
+    loggerMixin(this, prefix, debug, logStyle);
   }
 
   /**
